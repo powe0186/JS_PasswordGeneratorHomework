@@ -60,29 +60,36 @@ function generatePassword() {
     }
   }
   
-  // create a new array of possibilities by using .concat on the chosen arrays.
-  var possibleCharacters = [];
-  if (includesLower) {
-    possibleCharacters = possibleCharacters.concat(lowers);
-  }
-  if (includesUpper) {
-    possibleCharacters = possibleCharacters.concat(uppers);
-  }
-  if (includesNumbers) {
-    possibleCharacters = possibleCharacters.concat(numbers);
-  }
-  if (includesSpecial) {
-    possibleCharacters = possibleCharacters.concat(specials);
-  }
 
   // FOR loop that will run however many times the user's length was. 
   // Loop will concatenate a new random string using unicode and the valid characters array.
 
   var password = "";
-  for (let i = 0; i < length; i++) {
-    var randomIndex = Math.floor(Math.random() * possibleCharacters.length);
-    password += possibleCharacters[randomIndex];
+  
+  while (password.length < length) {
+
+    if (includesUpper) {
+      password += uppers[Math.floor(Math.random() * uppers.length)];
+      if (password.length === length) {break}
+    }
+
+    if (includesLower) {
+      password += lowers[Math.floor(Math.random() * lowers.length)];
+      if (password.length === length) {break}
+    }
+
+    if (includesNumbers) {
+      password += numbers[Math.floor(Math.random() * numbers.length)];
+      if (password.length === length) {break}
+    }
+
+    if (includesSpecial) {
+      password += specials[Math.floor(Math.random() * specials.length)];
+      if (password.length === length) {break}
+    }
+
   }
+
 
   return password;
 }
