@@ -20,30 +20,49 @@ function yesOrNo(question) {
     return false;
   }
 }
+
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
+  passwordText.value = password;
+}
 
+function generatePassword() {
   // Prompt the user for a password length. If the length is outside the range 8-128, the user is prompted again. 
   // store this value in a variable. I may need to change the variable from a string to a number.
 
-  var length = prompt("How long do you want your password to be. Please enter a number between 8 and 128");
+  var length = parseInt(prompt("How long do you want your password to be. Please enter a number between 8 and 128"), 10);
 
-  //Make sure the user input is between 8 and 128.
+  //Make sure the user input is between 8 and 128. AND THAT IT IS A NUMBER!
 
-  while (length < 8 || length > 128) {
-    length = prompt("You need to enter a password length between 8 and 128!");
+  while (length < 8 || length > 128 || isNaN(length)) {
+    length = parseInt(prompt("You need to enter a password length between 8 and 128 and it must be a number!"), 10);
   }
   // Prompt the user to type any characters they want included in the password.
   // Should this be separate  y/n prompts for lowercase, uppercase, special, numeric????? I'll assume that for now.
   // Prompt for each of these cases and store a boolean value in variable for each one.
-  
-  
-  
-  
+  // Need to deal with the case that the user says N to all question.
 
+  var includesLower = false;
+  var includesUpper = false;
+  var includesNumbers = false;
+  var includesSpecial = false;
+
+  while (!includesLower && !includesUpper && !includesNumbers && !includesSpecial) {
+    includesLower = yesOrNo("Should the password include lower case letter?");
+    includesUpper = yesOrNo("Should the password include upper case letters?");
+    includesNumbers = yesOrNo("Should the password include numbers?");
+    includesSpecial = yesOrNo("Should the password include special characters: $, #, &, @, etc ?");
+
+    if (!includesLower && !includesUpper && !includesNumbers && !includesSpecial) {
+      alert("You must answer Y for at least one of the questions.")
+    }
+  }
+  
   // create a new array of possibilities by using .concat on the chosen arrays.
+
+  var possibleCharacters = [];
 
 
   // FOR loop that will run however many times the user's length was. 
@@ -52,7 +71,7 @@ function writePassword() {
 
 
 
-  passwordText.value = password;
+  
 
 }
 
