@@ -2,9 +2,9 @@
 var generateBtn = document.querySelector("#generate");
 
 // Create arrays to hold capitals, lowercase, digits, and special characters.
-const capitals = ['A', 'B', 'C', 'D','E', 'F', 'G', 'H','I', 'J', 'K', 'L','M', 'N', 'O', 'P','Q', 'R', 'S', 'T','U', 'V', 'W', 'X', 'Y', 'Z'];
-const lowerCase = ['a', 'b', 'c', 'd','e', 'f', 'g', 'h','i', 'j', 'k', 'l','m', 'n', 'o', 'p','q', 'r', 's', 't','u', 'v', 'w', 'x', 'y', 'z'];
-const numerals = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+const uppers = ['A', 'B', 'C', 'D','E', 'F', 'G', 'H','I', 'J', 'K', 'L','M', 'N', 'O', 'P','Q', 'R', 'S', 'T','U', 'V', 'W', 'X', 'Y', 'Z'];
+const lowers = ['a', 'b', 'c', 'd','e', 'f', 'g', 'h','i', 'j', 'k', 'l','m', 'n', 'o', 'p','q', 'r', 's', 't','u', 'v', 'w', 'x', 'y', 'z'];
+const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 const specials = ['!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '_', '`', '{', '|', '}','~'];
 
 
@@ -61,10 +61,21 @@ function generatePassword() {
   }
   
   // create a new array of possibilities by using .concat on the chosen arrays.
-
   var possibleCharacters = [];
+  if (includesLower) {
+    possibleCharacters = possibleCharacters.concat(lowers);
+  }
+  if (includesUpper) {
+    possibleCharacters = possibleCharacters.concat(uppers);
+  }
+  if (includesNumbers) {
+    possibleCharacters = possibleCharacters.concat(numbers);
+  }
+  if (includesSpecial) {
+    possibleCharacters = possibleCharacters.concat(specials);
+  }
 
-
+  console.log(possibleCharacters);
   // FOR loop that will run however many times the user's length was. 
   // Loop will concatenate a new random string using unicode and the valid characters array.
 
