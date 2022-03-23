@@ -75,15 +75,16 @@ function generatePassword() {
     possibleCharacters = possibleCharacters.concat(specials);
   }
 
-  console.log(possibleCharacters);
   // FOR loop that will run however many times the user's length was. 
   // Loop will concatenate a new random string using unicode and the valid characters array.
 
+  var password = "";
+  for (let i = 0; i < length; i++) {
+    var randomIndex = Math.floor(Math.random() * possibleCharacters.length);
+    password += possibleCharacters[randomIndex];
+  }
 
-
-
-  
-
+  return password;
 }
 
 // Add event listener to generate button
